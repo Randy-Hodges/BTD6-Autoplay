@@ -144,7 +144,7 @@ def get_expert_map(position, page_num):
         autoplayV2.manual_rounds = False
 
     # Convert expert_map string into variable and access the correct script
-    expert_map_module = __import__('action_scripts.' + expert_map, fromlist=[expert_map])
+    expert_map_module = __import__('action_scripts.collection_event_scripts.' + expert_map, fromlist=[expert_map])
     action_list = getattr(expert_map_module, expert_map)
 
     return action_list
@@ -188,9 +188,14 @@ def click_standard():
     pyautogui.click(632, 587)
 
 def click_home():
-    '''Click the home button after victory or loss'''
+    '''Click the home button after victory (or loss in chimps mode)'''
     pyautogui.moveTo(785, 836)
     pyautogui.click(785, 836)
+
+def click_home_loss():
+    '''Click the home button after loss (continue button exists)'''
+    pyautogui.moveTo(703, 830)
+    pyautogui.click(703, 830)
 
 def click_victory_next():
     '''Click the next button after victory'''
@@ -219,16 +224,10 @@ def collect_event():
     pyautogui.moveTo(81, 55)
     pyautogui.click(81, 55)
 
-
 # endregion
-
-def namestr(obj, namespace):
-    return [name for name in namespace if namespace[name] is obj]
 
 
 def main():
-    # get_expert_map([0,0], page_num=1)
-    # exit()
 
     num_games = 25
     beat_level = False
@@ -247,11 +246,10 @@ def main():
         if beat_level == False:
             print('didnt beat level')
             broken_log.append(current_map)
-            #broken_log.append(namestr(expert_map, globals()))
             # Exit to main menu by pressing home button
-            click([703, 830]) # home button with the continue option
+            click_home_loss()
             time.sleep(.1)
-            click_home() # home without,
+            click_home() # shouldn't be needed, but it's there just in case
         else:
             # Exit to home after victory
             click_victory_next()
@@ -265,11 +263,15 @@ def main():
         if found_collection:
             collect_event() 
         
+        # Clear stored monkeys from previous level
         autoplayV2.monkey_dict.clear()
+
+        # Show updated stats of session
         print(f'Number of games won: {i + 1 - len(broken_log)}')
         print('broken_log:')
         for item in broken_log:
             print(item) 
+
         time.sleep(2)
 
 if __name__ == '__main__':

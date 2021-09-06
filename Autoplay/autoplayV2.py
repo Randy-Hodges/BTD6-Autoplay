@@ -8,7 +8,6 @@
 
 
 import ctypes
-import collections
 
 import keyboard
 from numpy.core.numeric import Inf
@@ -23,7 +22,6 @@ import cv2
 
 from monkey_info.monkey_hotkeys import hotkeys, reversed_hotkeys
 from monkey_info.monkey_info import monkey_info
-import action_scripts as scripts
 from class_definitions import Monkey
 from class_definitions import Action
 print('------------------')
@@ -765,7 +763,7 @@ def game_loop(script):
 
         # Do action if affordable
         if action_cost == 0 or action_cost <= current_gold:
-            print(f'Performing action: {action.name} {action.action}')
+            print(f'Performing action: {action.name} {action.action} | ', end='')
             if map_is_sanctuary:
                 done, round_count = do_action_sanctuary(action, current_gold, action_cost, round_count)
             elif manual_rounds:
@@ -782,7 +780,7 @@ def game_loop(script):
                     break
                 # Update action cost
                 action_cost = get_action_cost(action)
-                print(f'-Next action name: {action.name} {action.action}, Cost: {action_cost}')
+                print(f'Next action name: {action.name} {action.action}, Cost: {action_cost}')
                 broken_counter = 0
             else:
                 print('********logging that an action failed. Are we ok?')
