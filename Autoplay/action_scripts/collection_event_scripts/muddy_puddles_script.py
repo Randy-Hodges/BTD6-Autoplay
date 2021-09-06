@@ -1,4 +1,4 @@
-from class_definitions import Action
+from action_class import Action
 
 place = 'place'
 upgrade = 'upgrade'
