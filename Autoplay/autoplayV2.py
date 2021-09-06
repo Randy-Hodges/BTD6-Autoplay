@@ -21,8 +21,8 @@ from pytesseract import pytesseract
 import numpy as np
 import cv2
 
-from monkey_hotkeys import hotkeys, reversed_hotkeys
-from monkey_info import monkey_info
+from monkey_info.monkey_hotkeys import hotkeys, reversed_hotkeys
+from monkey_info.monkey_info import monkey_info
 import action_scripts as scripts
 from class_definitions import Monkey
 from class_definitions import Action

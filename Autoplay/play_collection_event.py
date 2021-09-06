@@ -1,45 +1,13 @@
-from PIL import Image, ImageGrab
-import importlib
 import pyautogui
 import numpy as np
 import cv2
 import time
 
 import autoplayV2
-import action_scripts
 
 print('-----------')
 
 current_map = ''
-
-def test_find_bonus_rewards():
-    method = cv2.TM_SQDIFF_NORMED
-
-    # Read images 
-    image = pyautogui.screenshot()
-    # make image compatible with cv2
-    large_image = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2BGR)
-    small_image = cv2.imread('bonus_rewards.png')
-
-    result = cv2.matchTemplate(small_image, large_image, method)
-
-    # We want the minimum squared difference
-    maxLoc, minLoc, comparedLoc, _ = cv2.minMaxLoc(result)
-    print(maxLoc, minLoc )
-
-    # Draw the rectangle:
-    # Extract the coordinates of our best match
-    MPx,MPy = comparedLoc
-
-    # Step 2: Get the size of the template. This is the same size as the match.
-    trows,tcols = small_image.shape[:2]
-
-    # Step 3: Draw the rectangle on large_image
-    cv2.rectangle(large_image, (MPx,MPy),(MPx+tcols,MPy+trows),(0,0,255),3)
-
-    img = cv2.cvtColor(large_image, cv2.COLOR_BGR2RGB)
-    im_pil = Image.fromarray(img)
-    im_pil.show()
 
 def find_image(given_image: str):
     '''
@@ -74,6 +42,7 @@ def find_image(given_image: str):
     else:
         return found, location
 
+
 def find_bonus_rewards_symbol():   
     '''
     Finds the map that contains the bonus reward and starts up a game in that map.
@@ -85,7 +54,9 @@ def find_bonus_rewards_symbol():
 
     # Click so that we consistently see the left expert maps screen
     click_play()
+    time.sleep(.1)
     click_beginner() 
+    time.sleep(.1)
     click_expert()
     time.sleep(1)
 
@@ -118,6 +89,7 @@ def find_bonus_rewards_symbol():
     else:
         print('Reward symbol not found')
         return 'None', False
+
 
 def get_expert_map(position, page_num):
     '''
