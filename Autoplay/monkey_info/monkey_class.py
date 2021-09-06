@@ -1,3 +1,4 @@
+
 class Monkey(object):
     '''Store data of placed monkey'''
     def __init__(self, position=None, name=None, mtype=None) -> None:
@@ -30,27 +31,5 @@ class Monkey(object):
             self.upgrades[2] += 1
             if self.upgrades[2] > 5 and (self.mtype != 'Dart Monkey' or self.mtype != 'Boomerang Monkey'):
                 print('invalid upgrade (higher than 5)')
-        
 
-
-class Action(object):
-    '''
-    Perform one action in the script
-    '''
-    def __init__(self, type, action=None, name=None, cost = None, position = None):
-        '''
-        Params:
-        :arg type: type of action
-            <'monkey' or 'place', 'upgrade'>
-        :arg action: monkey_hotkeys action
-        :arg name: name of monkey. Make it unique to the monkey. REQUIRED WHEN PLACING, UPGRADING
-        :arg cost: cost of action (in the in-game currency's gold).
-        :arg position: Position of cursor when placing monkey. REQUIRED WHEN PLACING
-        '''
-        self.type = type
-        self.name = name
-        self.action = action
-        self.cost = cost
-        self.position = position
-
-
+                

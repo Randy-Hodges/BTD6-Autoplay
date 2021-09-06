@@ -10,7 +10,6 @@
 import ctypes
 
 import keyboard
-from numpy.core.numeric import Inf
 import pyautogui
 
 import playsound
@@ -22,8 +21,8 @@ import cv2
 
 from monkey_info.monkey_hotkeys import hotkeys, reversed_hotkeys
 from monkey_info.monkey_info import monkey_info
-from class_definitions import Monkey
-from class_definitions import Action
+from monkey_info.monkey_class import Monkey
+from action_scripts.action_class import Action
 print('------------------')
 
 
@@ -32,7 +31,7 @@ print('------------------')
 path_to_tesseract = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 pytesseract.tesseract_cmd = path_to_tesseract
 
-# Variables to determine screenshot ranges (formed-from/affects tests done on my local computer)
+# Variables to determine screenshot ranges (formed from tests done on my local computer)
 test_scrn_width = 1920 
 test_scrn_height = 1080 
 
@@ -260,7 +259,7 @@ def do_action(action: Action, old_gold: int, action_cost: int) -> bool:
     '''Perform the given action. This function assumes there is enough money to do so.'''
     ####
     # Placing actions
-    if action.type == 'place' or action.type == 'monkey':
+    if action.type == 'place':
         # check if monkey already in monkey_dict
         if action.name in monkey_dict:
             print(f'YO. Your duplicated a monkey name dude. Fix that please. Name:{action.name}')
@@ -371,6 +370,8 @@ def do_action(action: Action, old_gold: int, action_cost: int) -> bool:
 
         return True
 
+    ####
+    # Finishing game
     if action.type == 'finish':
         return True
 
@@ -388,7 +389,7 @@ def do_action_manual(action: Action, old_gold: int, action_cost: int, round_coun
     global manual_rounds
     ####
     # Placing actions
-    if action.type == 'place' or action.type == 'monkey':
+    if action.type == 'place':
         # check if monkey already in monkey_dict
         if action.name in monkey_dict:
             print(f'YO. Your duplicated a monkey name dude. Fix that please. Name:{action.name}')
@@ -542,7 +543,7 @@ def do_action_sanctuary(action: Action, old_gold: int, action_cost: int, round_c
 
     ####
     # Placing actions
-    if action.type == 'place' or action.type == 'monkey':
+    if action.type == 'place':
         # check if monkey already in monkey_dict
         if action.name in monkey_dict:
             print(f'YO. Your duplicated a monkey name dude. Fix that please. Name:{action.name}')
