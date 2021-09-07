@@ -54,7 +54,7 @@ def find_bonus_rewards_symbol():
 
     # Click so that we consistently see the left expert maps screen
     click_play()
-    time.sleep(.1)
+    time.sleep(.7)  
     click_beginner() 
     time.sleep(.1)
     click_expert()
@@ -144,7 +144,7 @@ def get_expert_map(position, page_num):
         autoplayV2.manual_rounds = False
 
     # Convert expert_map string into variable and access the correct script
-    expert_map_module = __import__('action_scripts.collection_event_scripts.' + expert_map, fromlist=[expert_map])
+    expert_map_module = __import__('action_scripts.collection_scripts.' + expert_map, fromlist=[expert_map])
     action_list = getattr(expert_map_module, expert_map)
 
     return action_list

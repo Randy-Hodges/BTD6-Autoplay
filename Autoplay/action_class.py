@@ -1,5 +1,3 @@
-       
-
 
 class Action(object):
     '''

@@ -22,7 +22,7 @@ import cv2
 from monkey_info.monkey_hotkeys import hotkeys, reversed_hotkeys
 from monkey_info.monkey_info import monkey_info
 from monkey_info.monkey_class import Monkey
-from action_scripts.action_class import Action
+from action_class import Action
 print('------------------')
 
 
