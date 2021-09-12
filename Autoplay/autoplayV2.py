@@ -702,8 +702,12 @@ def get_action_cost(action: Action) -> int:
 # endregion
 
 # -------------- Running Code -----------------
-def game_loop(script):
-    '''Play through a game'''
+def game_loop(script) -> bool:
+    '''
+    Play through a game
+    
+    :returns: True if run was successful, False otherwise
+    '''
     global manual_rounds
     global map_is_sanctuary
     # region Initialization
@@ -745,12 +749,14 @@ def game_loop(script):
                 print('possible level up. (gold hasnt changed in a while)')
                 win, loss = check_victory_loss() # just in case
                 if not win or not loss:
-                    for _ in range(4):
+                    for _ in range(3):
                         # Click middle to reset gui
                         pyautogui.moveTo(837, 564)
                         pyautogui.click(837, 564)
                         time.sleep(1.5)
                     start_round(1)
+                else:
+                    return False
         else:
             same_gold_count = 0
 
@@ -797,6 +803,8 @@ def game_loop(script):
                     pyautogui.click(837, 564)
                     time.sleep(1.5)
                 start_round(1)
+            else:
+                return False
 
         # Exit if loop somehow broke
         if broken_counter > broken_thresh:

@@ -56,7 +56,7 @@ def find_bonus_rewards_symbol():
     click_play()
     time.sleep(.7)  
     click_beginner() 
-    time.sleep(.1)
+    time.sleep(.3)
     click_expert()
     time.sleep(1)
 
@@ -66,9 +66,9 @@ def find_bonus_rewards_symbol():
         expert_map = get_expert_map(location, page_num)
         # load up a game
         click(location)
-        time.sleep(.2)
+        time.sleep(.7)
         click_hard()
-        time.sleep(.5)
+        time.sleep(.7)
         click_standard()
         return expert_map, True
 
@@ -81,9 +81,9 @@ def find_bonus_rewards_symbol():
         expert_map = get_expert_map(location, page_num)
         # load up a game
         click(location)
-        time.sleep(.2)
+        time.sleep(.7)
         click_hard()
-        time.sleep(.5)
+        time.sleep(.7)
         click_standard()
         return expert_map, True
     else:
@@ -101,7 +101,7 @@ def get_expert_map(position, page_num):
     # Expert Map names
     page_one = [['sanctuary_script', 'ravine_script', 'flooded_valley_script'],
                 ['infernal_script', 'bloody_puddles_script', 'workshop_script']]
-    page_two = [['quad_script', 'dark_castle_script', 'muddy_puddles_script'],
+    page_two = [['quad_script', 'dark_castle_script', 'muddy_puddles_script'], 
                 ['ouch_script']]
     # dimensions of screen
     height = autoplayV2.screen_height
@@ -229,9 +229,10 @@ def collect_event():
 
 def main():
 
-    num_games = 25
+    num_games = 35
     beat_level = False
     broken_log = []
+    start_collection = time.time()
 
     for i in range(num_games):
         # Launch game with the bonus rewards symbol
@@ -273,6 +274,10 @@ def main():
             print(item) 
 
         time.sleep(2)
+
+        end_collection = time.time()
+        time_collection = end_collection - start_collection
+        print(f'Number of games run: {i}, Time taken: {time_collection}, Average time per game: {(int(time_collection)/(i + 1))/60} minutes')
 
 if __name__ == '__main__':
     main()
