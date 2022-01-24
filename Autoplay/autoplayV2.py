@@ -1,7 +1,7 @@
-#usr bin shit
+#!/usr/bin/python3 
 #
 #
-# Desc:
+# Desc: Plays through a level once a level is loaded.
 #
 # TODO: fix the click() and position methods to work on other people's screens
 #
@@ -11,6 +11,7 @@ import ctypes
 
 import keyboard
 import pyautogui
+import pydirectinput
 
 import playsound
 import time
@@ -226,13 +227,21 @@ def wait_till_victory():
 
 def start_game():
     '''start the game'''
-    pyautogui.press('space')
-    pyautogui.press('space')
+    print('\nStarting Game')
+    # pyautogui.moveTo(1835, 1016)
+    # pyautogui.click(1835, 1016)
+    
+    # pyautogui.moveTo(1835, 1016)
+    # pyautogui.click(1835, 1016)
+    pydirectinput.press('space')
+    pydirectinput.press('space')
 
 
-def start_round(round_count: int=0) -> int:
+def start_round(round_count: int=0) -> int: 
     '''start the round'''
-    pyautogui.press('space')
+    pydirectinput.press('space')
+    # pyautogui.moveTo(1835, 1016)
+    # pyautogui.click(1835, 1016)
     round_count += 1
     return round_count
 
@@ -255,6 +264,7 @@ def change_auto_start():
 # endregion
 
 # region ------ Data-Using/Data-Manipulating Methods -------
+# TODO: (optional) move action functions to action class
 def do_action(action: Action, old_gold: int, action_cost: int) -> bool:
     '''Perform the given action. This function assumes there is enough money to do so.'''
     ####
@@ -292,16 +302,16 @@ def do_action(action: Action, old_gold: int, action_cost: int) -> bool:
         time.sleep(.1)
 
         # Upgrade monkey
-        pyautogui.press(hotkeys[action.action.title()])
+        pydirectinput.press(hotkeys[action.action.title()])
         
         # Click away to reset gui
         pyautogui.moveTo(1600, 1040)
         pyautogui.click(1600, 1040)
 
-        # Check to make sure action actually occurred an there wasn't a misread of money. This functionality needs to be double checked
+        # Check to make sure action actually occurred an there wasn't a misread of money. 
+        # (This functionality should be double checked)
         if action.cost > 4000:
-            print('Upgrade over 4000')
-            print(old_gold)
+            print(f'Upgrade over 4000. old_gold: {old_gold}') 
             time.sleep(2)
             new_money = get_money()
             if new_money - old_gold > 0:
@@ -329,11 +339,11 @@ def do_action(action: Action, old_gold: int, action_cost: int) -> bool:
             pyautogui.click(monkey.position)
 
             # Change targeting from first to strong
-            pyautogui.keyDown('ctrl')
-            pyautogui.keyDown('tab')
+            pydirectinput.keyDown('ctrl')
+            pydirectinput.keyDown('tab')
             time.sleep(.1)
-            pyautogui.keyUp('ctrl')
-            pyautogui.keyUp('tab')
+            pydirectinput.keyUp('ctrl')
+            pydirectinput.keyUp('tab')
             
             # Click away to reset gui
             pyautogui.moveTo(1600, 1040)
@@ -424,7 +434,7 @@ def do_action_manual(action: Action, old_gold: int, action_cost: int, round_coun
         time.sleep(.1)
 
         # Upgrade monkey
-        pyautogui.press(hotkeys[action.action.title()])
+        pydirectinput.press(hotkeys[action.action.title()])
         
         # Click away to reset gui
         pyautogui.moveTo(1600, 1040)
@@ -459,11 +469,11 @@ def do_action_manual(action: Action, old_gold: int, action_cost: int, round_coun
             time.sleep(.1)
 
             # Change targeting from first to strong
-            pyautogui.keyDown('ctrl')
-            pyautogui.keyDown('tab')
+            pydirectinput.keyDown('ctrl')
+            pydirectinput.keyDown('tab')
             time.sleep(.1)
-            pyautogui.keyUp('ctrl')
-            pyautogui.keyUp('tab')
+            pydirectinput.keyUp('ctrl')
+            pydirectinput.keyUp('tab')
             
             # Click away to reset gui
             pyautogui.moveTo(1600, 1040)
@@ -578,7 +588,7 @@ def do_action_sanctuary(action: Action, old_gold: int, action_cost: int, round_c
         time.sleep(.1)
 
         # Upgrade monkey
-        pyautogui.press(hotkeys[action.action.title()])
+        pydirectinput.press(hotkeys[action.action.title()])
         
         # Click away to reset gui
         pyautogui.moveTo(1600, 1040)
@@ -613,11 +623,11 @@ def do_action_sanctuary(action: Action, old_gold: int, action_cost: int, round_c
             time.sleep(.1)
 
             # Change targeting from first to strong
-            pyautogui.keyDown('ctrl')
-            pyautogui.keyDown('tab')
+            pydirectinput.keyDown('ctrl')
+            pydirectinput.keyDown('tab')
             time.sleep(.1)
-            pyautogui.keyUp('ctrl')
-            pyautogui.keyUp('tab')
+            pydirectinput.keyUp('ctrl')
+            pydirectinput.keyUp('tab')
             
             # Click away to reset gui
             pyautogui.moveTo(1600, 1040)
@@ -830,7 +840,7 @@ def game_loop(script) -> bool:
             # waiting a set time between early rounds
             else:
                 time_elapsed = time.time() - time_last_round
-                if time_elapsed > 18: 
+                if time_elapsed > 20: 
                     print('low round time start')
                     round_count = start_round(round_count)
                     time_last_round = time.time()

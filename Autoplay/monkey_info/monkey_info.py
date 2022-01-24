@@ -33,6 +33,26 @@ monkey_info = {
         'bottom6': 350000
     },
     #######################
+    'Glue Monkey':{
+        'category': 'primary',
+        'place': ,
+        'top1': ,
+        'top2': ,
+        'top3': ,
+        'top4': ,
+        'top5': ,
+        'middle1': ,
+        'middle2': ,
+        'middle3': ,
+        'middle4': ,
+        'middle5': ,
+        'bottom1': ,
+        'bottom2': ,
+        'bottom3': ,
+        'bottom4': ,
+        'bottom5': ,
+    },
+    #######################
     'Boomerang Monkey':{
         'category': 'primary',
         'place': 300,

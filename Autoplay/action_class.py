@@ -8,9 +8,9 @@ class Action(object):
         Params:
         :arg type: type of action
             <'place', 'upgrade', 'target', 'start', 'finish', 'click'>
-        :arg action: monkey_hotkeys action
+        :arg action: specific action to be performed (full list of options in monkey_hotkeys.py)
         :arg name: name of monkey. Make it unique to the monkey. REQUIRED WHEN PLACING, UPGRADING
-        :arg cost: cost of action (in the in-game currency's gold).
+        :arg cost: cost of action (Not required. All monkey upgrade data is in monkey_info.py)
         :arg position: Position of cursor when placing monkey. REQUIRED WHEN PLACING
         '''
         self.type = type

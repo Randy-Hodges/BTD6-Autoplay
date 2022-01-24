@@ -1,6 +1,16 @@
+#!/usr/bin/python3 
+#
+#
+# Desc: Cycles through the home screen and menus to find the most rewarding level and loads that level. Calls 
+#       autoplayV2.py to play through that level and then repeats this whole process.
+#
+# TODO: fix the click() and position methods to work on other people's screens
+#
+
 import pyautogui
 import numpy as np
 import cv2
+from PIL import Image
 import time
 
 import autoplayV2
@@ -35,11 +45,16 @@ def find_image(given_image: str):
     MPx,MPy = comparedLoc
     location = [MPx, MPy]
 
+    # img = cv2.cvtColor(large_image, cv2.COLOR_BGR2RGB)
+    # im_pil = Image.fromarray(img)
+    # im_pil.show()
+
     if maxLoc < .05:
         print('Found it')
         found = True
         return found, location
     else:
+        # print(f'maxLoc: {maxLoc}')
         return found, location
 
 
@@ -61,7 +76,7 @@ def find_bonus_rewards_symbol():
     time.sleep(1)
 
     # Check for symbol on expert page 1
-    found_symbol, location = find_image('reference_images/bonus_rewards.png')
+    found_symbol, location = find_image('reference_images/oct_bonus_rewards.png')
     if found_symbol:
         expert_map = get_expert_map(location, page_num)
         # load up a game
@@ -76,7 +91,7 @@ def find_bonus_rewards_symbol():
     click_page_right()
     time.sleep(1)
     page_num += 1
-    found_symbol, location = find_image('reference_images/bonus_rewards.png')
+    found_symbol, location = find_image('reference_images/oct_bonus_rewards.png')
     if found_symbol:
         expert_map = get_expert_map(location, page_num)
         # load up a game
@@ -189,13 +204,13 @@ def click_standard():
 
 def click_home():
     '''Click the home button after victory (or loss in chimps mode)'''
-    pyautogui.moveTo(785, 836)
-    pyautogui.click(785, 836)
+    pyautogui.moveTo(702, 859)
+    pyautogui.click(702, 859)
 
 def click_home_loss():
     '''Click the home button after loss (continue button exists)'''
-    pyautogui.moveTo(703, 830)
-    pyautogui.click(703, 830)
+    pyautogui.moveTo(575, 823)
+    pyautogui.click(575, 823)
 
 def click_victory_next():
     '''Click the next button after victory'''
@@ -235,7 +250,7 @@ def main():
     start_collection = time.time()
 
     for i in range(num_games):
-        # Launch game with the bonus rewards symbol
+        # Launch the game with the bonus rewards symbol
         expert_map, found = find_bonus_rewards_symbol()
         if found:
             # Beat the level
@@ -258,9 +273,9 @@ def main():
             click_home()
             time.sleep(1.5)
             
-        time.sleep(5)
+        time.sleep(7)
         # Collect event rewards if needed
-        found_collection, _ = find_image('reference_images/collection_event.png')
+        found_collection, _ = find_image('reference_images/oct_collection_event.png')
         if found_collection:
             collect_event() 
         
@@ -277,7 +292,7 @@ def main():
 
         end_collection = time.time()
         time_collection = end_collection - start_collection
-        print(f'Number of games run: {i}, Time taken: {time_collection}, Average time per game: {(int(time_collection)/(i + 1))/60} minutes')
+        print(f'Number of games run: {i + 1}, Time taken: {time_collection/60} minutes, Average time per game: {(int(time_collection)/(i + 1))/60} minutes')
 
 if __name__ == '__main__':
     main()
