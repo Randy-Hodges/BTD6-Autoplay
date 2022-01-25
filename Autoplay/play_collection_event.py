@@ -18,6 +18,7 @@ import autoplayV2
 print('-----------')
 
 current_map = ''
+bonus_rewards_image = 'reference_images/oct_bonus_rewards.png'
 
 def find_image(given_image: str):
     '''
@@ -65,6 +66,7 @@ def find_bonus_rewards_symbol():
     :returns: action script of map selected
               if the bonus rewards symbol was found (bool)
     '''
+    global bonus_rewards_image
     page_num = 1 # there are two expert map selection pages
 
     # Click so that we consistently see the left expert maps screen
@@ -76,7 +78,7 @@ def find_bonus_rewards_symbol():
     time.sleep(1)
 
     # Check for symbol on expert page 1
-    found_symbol, location = find_image('reference_images/oct_bonus_rewards.png')
+    found_symbol, location = find_image(bonus_rewards_image)
     if found_symbol:
         expert_map = get_expert_map(location, page_num)
         # load up a game
@@ -91,7 +93,7 @@ def find_bonus_rewards_symbol():
     click_page_right()
     time.sleep(1)
     page_num += 1
-    found_symbol, location = find_image('reference_images/oct_bonus_rewards.png')
+    found_symbol, location = find_image(bonus_rewards_image)
     if found_symbol:
         expert_map = get_expert_map(location, page_num)
         # load up a game
