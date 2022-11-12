@@ -23,13 +23,12 @@ The easiest way to go about this is by looking at one of the already functioning
 >Quick tip: You can easily copy your mouse position when planning to place monkeys by using the copy_mouse_position.py script. This is located in the root folder.
  
 ### Things to be aware of
-- Since the latest BTD6 update, the current Workshop script no longer beats the Workshop map
-- All placements were made using my computer screen's measurements with the default resolution of the game. This may or may not affect performance on your computer.
-- Not all of the monkey upgrade costs have been added. When adding a new monkey, make sure to check monkey_info.py to see if the upgrade costs are there. If they aren't and you want to use that new monkey, just add in the monkey costs into the monkey_info dictionary. 
+- As BTD6 gets updates and balance changes, the costs and power levels of different towers can change which could cause certain scripts to fail. If this happens and you want to use the code, you can update the action scripts and/or update costs in monkey_info.py.
+- All placements were made with the standard 1920x1080 resolution of the game. Other resolutions may cause the code to fail.
+- Not all of the monkey upgrade costs have been added (only the costs of monkeys I used were added). When adding a new monkey, make sure to check monkey_info.py to see if the upgrade costs are there. If they aren't and you want to use that new monkey, just add in the monkey costs into the monkey_info dictionary. 
  
 ### To do
-- Scale placement of monkeys with different resolutions of the game.
 - Add in the missing upgrade costs into monkey_info.py
-- Update the workshop script to beat the level.
+- Check/Update action scripts so that they actually beat the levels (Last verified in September of 2020).
 - Move the clicking-only methods to their own file.
-- Containerize the whole project for deployment on other computers that don't have the necessary packages.
+- Containerize the whole project with docker for deployment on other computers that don't have the necessary packages.
