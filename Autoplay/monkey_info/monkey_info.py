@@ -7,7 +7,7 @@
 monkey_info = {
     #######################
     'Hero':{
-        'Psi': 780
+        'Psi': 970
     },
     #######################
     'Dart Monkey':{
@@ -35,22 +35,22 @@ monkey_info = {
     #######################
     'Glue Monkey':{
         'category': 'primary',
-        'place': ,
-        'top1': ,
-        'top2': ,
-        'top3': ,
-        'top4': ,
-        'top5': ,
-        'middle1': ,
-        'middle2': ,
-        'middle3': ,
-        'middle4': ,
-        'middle5': ,
-        'bottom1': ,
-        'bottom2': ,
-        'bottom3': ,
-        'bottom4': ,
-        'bottom5': ,
+        'place': 295,
+        'top1': 215,
+        'top2': 325,
+        'top3': 2700,
+        'top4': 4400,
+        'top5': 23760,
+        'middle1': 110,
+        'middle2': 1945,
+        'middle3': 3510,
+        'middle4': 3780,
+        'middle5': 16200,
+        'bottom1': 130,
+        'bottom2': 430,
+        'bottom3': 3670,
+        'bottom4': 3240,
+        'bottom5': 30240,
     },
     #######################
     'Boomerang Monkey':{

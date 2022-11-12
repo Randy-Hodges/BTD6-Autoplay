@@ -18,7 +18,8 @@ import time
 from PIL import Image, ImageGrab
 from pytesseract import pytesseract
 import numpy as np
-import cv2
+import cv2 # if installing, try 'pip install opencv-python'
+import os
 
 from monkey_info.monkey_hotkeys import hotkeys, reversed_hotkeys
 from monkey_info.monkey_info import monkey_info
@@ -27,12 +28,14 @@ from action_class import Action
 print('------------------')
 
 
-# region --Initial Set-up--
-# Setting up tesseract
+# region --Initial Set-up--  
+# Setting up tesseract (Only needed if tesseract executable is not in your PATH)
+# For windows, there is a tesseract installer that is needed. Look it up.
 path_to_tesseract = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 pytesseract.tesseract_cmd = path_to_tesseract
 
 # Variables to determine screenshot ranges (formed from tests done on my local computer)
+# (Update: looking back on this code it looks like a standard 1920x1080 resolution, which should be the default for the game)
 test_scrn_width = 1920 
 test_scrn_height = 1080 
 
@@ -151,14 +154,13 @@ def find_image(given_image: str, maxLoc_thresh = .05):
     image = pyautogui.screenshot()
     # make image compatible with cv2
     large_image = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2BGR)
-    small_image = cv2.imread(given_image)
+    small_image = cv2.imread(given_image) 
 
     result = cv2.matchTemplate(small_image, large_image, method)
 
     # We want the minimum squared difference
     maxLoc, minLoc, comparedLoc, _ = cv2.minMaxLoc(result)
     
-
     # Location of best match
     MPx,MPy = comparedLoc
     location = [MPx, MPy]
@@ -188,8 +190,8 @@ def round_finished() -> bool:
     
     :returns: True if round is stopped, False if round is still going
     '''
-    result, stopped = find_image('reference_images/round_stopped.png')
-    result2, going = find_image('reference_images/round_going.png')
+    result, stopped = find_image('Autoplay/reference_images/round_stopped.png')
+    result2, going = find_image('Autoplay/reference_images/round_going.png')
     # print(result, stopped, result2, going)
     # Less means better match
     if stopped < going:
@@ -204,8 +206,8 @@ def check_victory_loss():
     
     :returns: found_victory (bool), found_loss (bool)
     '''
-    found_victory, _ = find_image('reference_images/victory.png')
-    found_loss, _ = find_image('reference_images/defeat.png')
+    found_victory, _ = find_image('Autoplay/reference_images/victory.png')
+    found_loss, _ = find_image('Autoplay/reference_images/defeat.png')
     return found_victory, found_loss
     
 
@@ -854,15 +856,10 @@ def game_loop(script) -> bool:
 
 
 def main():
-
-    round_finished()
-    # playsound.playsound(r"D:\randy\Audio\Sound Effects\The Nut Button - When Memes Become Reality.mp3")
-
-    # map_is_sanctuary = True
-    # if map_is_sanctuary:
-    #     manual_rounds = True
-
-    # game_completed = game_loop(scripts.sanctuary_script)
+    # --- EXAMPLE OF RUNNING A SCRIPT:
+    # from action_scripts.collection_scripts.infernal_script import infernal_script
+    # game_completed = game_loop(infernal_script)
+    pass
 
 
 if __name__ == '__main__':
