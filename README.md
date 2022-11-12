@@ -12,7 +12,7 @@ This bot works by running an action script and by keying off select screenshots 
 ### Using the bot
 If you want to simply beat a level, you can run game_loop(action script) from the autoplayV2.py script. When using a custom action script, make sure that your action script is loaded in and passed into game_loop(). If you are having trouble loading in your action_script, either check the imports in /action_scripts/\_\_init\_\_.py or move your action script into the same folder as autoplayV2.py. 
 
-If you want the bot to repeatedly play through all of the expert levels, you would run play_collection_event.py. However, before running the file you need to make sure that the bot is using the correct bonus rewards image (located in reference_images). This is a small image next to a level that indicates that you will get bonus rewards from playing that level and it changes for every event. Ex:
+If you want the bot to repeatedly play through all of the expert levels, you would run play_collection_event.py. However, before running the file you need to make sure that the bot is using the correct bonus rewards image (located in /reference_images). This is a small image next to a level that indicates that you will get bonus rewards from playing that level and it changes for every event. Ex:
 
 ![bonus rewards](/Autoplay/reference_images/bonus_rewards.png)
 
@@ -24,12 +24,12 @@ The easiest way to go about this is by looking at one of the already functioning
  
 ### Things to be aware of
 - Since the latest BTD6 update, the current Workshop script no longer beats the Workshop map
-- All placements were made using my computer screen's measurements. This may or may not affect performance on your computer.
+- All placements were made using my computer screen's measurements with the default resolution of the game. This may or may not affect performance on your computer.
 - Not all of the monkey upgrade costs have been added. When adding a new monkey, make sure to check monkey_info.py to see if the upgrade costs are there. If they aren't and you want to use that new monkey, just add in the monkey costs into the monkey_info dictionary. 
  
 ### To do
-- Scale placement of monkeys with size of computer screen.
+- Scale placement of monkeys with different resolutions of the game.
 - Add in the missing upgrade costs into monkey_info.py
-- Update workshop script to beat the level.
+- Update the workshop script to beat the level.
 - Move the clicking-only methods to their own file.
 - Containerize the whole project for deployment on other computers that don't have the necessary packages.
