@@ -12,7 +12,7 @@ This bot works by running an action script and by keying off select screenshots 
 ### Using the bot
 If you want to simply beat a level, you can run game_loop(action script) from the autoplayV2.py script. When using a custom action script, make sure that your action script is loaded in and passed into game_loop(). If you are having trouble loading in your action_script, either check the imports in /action_scripts/\_\_init\_\_.py or move your action script into the same folder as autoplayV2.py. 
 
-If you want the bot to repeatedly play through all of the expert levels, you would run play_collection_event.py. However, before running the file you need to make sure that the bot is using the correct bonus rewards image (located in /reference_images). This is a small image next to a level that indicates that you will get bonus rewards from playing that level and it changes for every event. Ex:
+If you want the bot to repeatedly play through all of the expert levels for a collection event, you would run play_collection_event.py. However, before running the file you need to make sure that the bot is using the correct bonus rewards image (located in /reference_images). This is a small image next to a level that indicates that you will get bonus rewards from playing that level and it changes for every event. Ex:
 
 ![bonus rewards](/Autoplay/reference_images/bonus_rewards.png)
 
